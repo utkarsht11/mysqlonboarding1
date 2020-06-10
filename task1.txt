@@ -1,0 +1,20 @@
+Task-1 modifying payments table to make a query possible to identify which payment corresponds to which order
+mysql> alter table payments add column orderNumber int;
+Query OK, 0 rows affected (0.54 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table payments add foreign key(orderNumber) references orders(orderNumber);
+Query OK, 273 rows affected (6.93 sec)
+Records: 273  Duplicates: 0  Warnings: 0
+
+mysql> describe payments;
++----------------+---------------+------+-----+---------+-------+
+| Field          | Type          | Null | Key | Default | Extra |
++----------------+---------------+------+-----+---------+-------+
+| customerNumber | int           | NO   | PRI | NULL    |       |
+| checkNumber    | varchar(50)   | NO   | PRI | NULL    |       |
+| paymentDate    | date          | NO   |     | NULL    |       |
+| amount         | decimal(10,2) | NO   |     | NULL    |       |
+| orderNumber    | int           | YES  | MUL | NULL    |       |
++----------------+---------------+------+-----+---------+-------+
+5 rows in set (0.08 sec)
